@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkSpace — Find Your Perfect Space</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- header infoi -->
+  <header>
+    <a href="index.html" class="logo">Work<span>Space</span></a>
+    <nav>
+      <span class="nav-user" id="nav-username"></span>
+      <div id="nav-owner-links" class="flex gap-1">
+        <a href="add-property.html">Add Property</a>
+        <a href="add-workspace.html">Add Workspace</a>
+      </div>
+      <a href="properties.html" class="nav-hidden-mobile">Browse</a>
+      <a href="login.html"  id="nav-login">Login</a>
+      <a href="signup.html" id="nav-signup" class="nav-btn">Sign Up</a>
+      <a href="#" id="nav-logout" onclick="logoutUser()" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-tag">🏢 Find Your Workspace</div>
+      <h1>The Smart Way to Find <span>Shared Workspaces</span></h1>
+      <p>Connect with workspace owners and find the perfect desk, private office, or meeting room — near you, on your terms.</p>
+      <div class="hero-btns">
+        <a href="properties.html" class="btn btn-primary">Browse Workspaces</a>
+        <a href="signup.html" class="btn btn-outline">List Your Space</a>
+      </div>
+    </section>
+
+    <!-- siimpl;e stats -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Listed Properties</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1,200+</div>
+        <div class="stat-label">Available Workspaces</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3,000+</div>
+        <div class="stat-label">Happy Coworkers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Neighborhoods</div>
+      </div>
+    </div>
+
+    <!-- featrues html  -->
+    <section class="features">
+      <h2>Everything You Need</h2>
+      <p class="features-sub">Whether you own a space or need one, we've got you covered.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Smart Search</h3>
+          <p>Filter by neighborhood, price, lease term, amenities, and more to find exactly what you need.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Easy Listing</h3>
+          <p>Owners can list properties and workspaces in minutes with full control over details and availability.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📞</div>
+          <h3>Direct Contact</h3>
+          <p>Get in touch with workspace owners directly — no middlemen, no hidden fees.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Flexible Terms</h3>
+          <p>Rent by the day, week, or month — find a lease that matches your workflow and budget.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure Accounts</h3>
+          <p>Create an owner or coworker account to manage your listings or saved searches.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚌</div>
+          <h3>Transit-Friendly</h3>
+          <p>Filter spaces by public transit access and parking availability so your commute stays easy.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- cta -->
+    <section class="cta">
+      <h2>Ready to Get Started?</h2>
+      <p>Join our growing community of workspace owners and coworkers today.</p>
+      <div class="cta-btns">
+        <a href="signup.html?role=owner"    class="btn btn-primary">I'm an Owner</a>
+        <a href="signup.html?role=coworker" class="btn btn-outline">I'm a Coworker</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer info -->
+  <footer>
+    <p>&copy; 2025 WorkSpace &nbsp;|&nbsp;
+      <a href="properties.html">Browse</a> &nbsp;|&nbsp;
+      <a href="signup.html">Sign Up</a> &nbsp;|&nbsp;
+      <a href="login.html">Login</a>
+    </p>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

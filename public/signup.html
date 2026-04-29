@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — WorkSpace</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Work<span>Space</span></a>
+    <nav>
+      <a href="properties.html" class="nav-hidden-mobile">Browse</a>
+      <a href="login.html"  id="nav-login">Login</a>
+      <a href="signup.html" id="nav-signup" class="nav-btn">Sign Up</a>
+      <a href="#" id="nav-logout" onclick="logoutUser()" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <h1>Create Account</h1>
+        <p class="sub">Join WorkSpace today — it's free.</p>
+
+        <div id="message" class="message"></div>
+
+        <!-- Role Selector -->
+        <div class="form-group">
+          <label>I am a...</label>
+          <div class="role-toggle">
+            <button class="role-btn" id="btn-owner"    onclick="selectRole('owner')">🏢 Owner</button>
+            <button class="role-btn" id="btn-coworker" onclick="selectRole('coworker')">💼 Coworker</button>
+          </div>
+          <input type="hidden" id="role" value="" />
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Jane Smith" />
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(403) 555-0100" />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" />
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Min 6 characters" />
+        </div>
+
+        <button class="btn btn-primary" onclick="handleSignup()">Create Account</button>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Log in</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 WorkSpace</p>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>

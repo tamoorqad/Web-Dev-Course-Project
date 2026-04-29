@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Property — WorkSpace</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Work<span>Space</span></a>
+    <nav>
+      <span class="nav-user" id="nav-username"></span>
+      <div id="nav-owner-links" class="flex gap-1">
+        <a href="add-property.html">Add Property</a>
+        <a href="add-workspace.html">Add Workspace</a>
+      </div>
+      <a href="properties.html">My Listings</a>
+      <a href="login.html"  id="nav-login">Login</a>
+      <a href="signup.html" id="nav-signup" class="nav-btn">Sign Up</a>
+      <a href="#" id="nav-logout" onclick="logoutUser()" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="form-wrap">
+      <h1 class="page-title">Add Property</h1>
+      <p class="page-subtitle">List a property where coworkers can rent workspaces.</p>
+
+      <div id="message" class="message"></div>
+
+      <div class="card">
+
+        <!-- Address -->
+        <div class="form-group">
+          <label for="address">Street Address</label>
+          <input type="text" id="address" placeholder="123 Main Street SW" />
+        </div>
+
+        <!-- Neighborhood + Sq Ft -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="neighborhood">Neighborhood</label>
+            <input type="text" id="neighborhood" placeholder="Downtown, Beltline..." />
+          </div>
+          <div class="form-group">
+            <label for="sqft">Square Feet</label>
+            <input type="number" id="sqft" placeholder="e.g. 2000" min="1" />
+          </div>
+        </div>
+
+        <!-- Amenities -->
+        <div class="form-group">
+          <label>Amenities</label>
+          <div class="flex gap-2 flex-wrap mt-1">
+            <div class="checkbox-group">
+              <input type="checkbox" id="parking" />
+              <label for="parking">🅿️ Parking Garage</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="transit" />
+              <label for="transit">🚌 Public Transit Access</label>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="handleAddProperty()">Add Property</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 WorkSpace</p>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/add-property.js"></script>
+</body>
+</html>

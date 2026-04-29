@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Workspaces — WorkSpace</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Work<span>Space</span></a>
+    <nav>
+      <span class="nav-user" id="nav-username"></span>
+      <div id="nav-owner-links" class="flex gap-1">
+        <a href="add-property.html">Add Property</a>
+        <a href="add-workspace.html">Add Workspace</a>
+      </div>
+      <a href="login.html"  id="nav-login">Login</a>
+      <a href="signup.html" id="nav-signup" class="nav-btn">Sign Up</a>
+      <a href="#" id="nav-logout" onclick="logoutUser()" style="display:none;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- search bar and browse view for coworkers and public -->
+    <div id="view-coworker">
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <div class="search-inner">
+          <div class="search-grid">
+            <div class="form-group">
+              <label>Neighborhood</label>
+              <input type="text" id="s-neighborhood" placeholder="e.g. Downtown" />
+            </div>
+            <div class="form-group">
+              <label>Type</label>
+              <select id="s-type">
+                <option value="">Any</option>
+                <option value="meeting">Meeting Room</option>
+                <option value="private">Private Office</option>
+                <option value="desk">Open Desk</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Min Seats</label>
+              <input type="number" id="s-seats" placeholder="e.g. 4" min="1" />
+            </div>
+            <div class="form-group">
+              <label>Max Price ($)</label>
+              <input type="number" id="s-price" placeholder="e.g. 500" min="0" />
+            </div>
+            <div class="form-group">
+              <label>Lease Term</label>
+              <select id="s-lease">
+                <option value="">Any</option>
+                <option value="day">Per Day</option>
+                <option value="week">Per Week</option>
+                <option value="month">Per Month</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Available By</label>
+              <input type="date" id="s-date" />
+            </div>
+          </div>
+          <div class="search-actions">
+            <button class="btn btn-primary btn-sm" onclick="runSearch()">🔍 Search</button>
+            <button class="btn btn-secondary btn-sm" onclick="clearSearch()">Clear</button>
+            <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--muted);margin-left:0.5rem;">
+              <input type="checkbox" id="s-parking" style="width:15px;height:15px;" /> Parking
+            </label>
+            <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--muted);">
+              <input type="checkbox" id="s-transit" style="width:15px;height:15px;" /> Transit
+            </label>
+            <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.82rem;color:var(--muted);">
+              <input type="checkbox" id="s-no-smoke" style="width:15px;height:15px;" /> No Smoking
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- results grid -->
+      <div class="container">
+        <!-- sort dropdown -->
+        <div class="sort-bar">
+          <label>Sort by:</label>
+          <select id="sort-coworker" onchange="runSearch()">
+            <option value="default">Default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="seats-desc">Most Seats</option>
+            <option value="date-asc">Availability (Soonest)</option>
+          </select>
+        </div>
+
+        <div id="results-header" class="text-muted text-sm mb-1" style="margin-bottom:1rem;"></div>
+        <div id="ws-results" class="ws-grid"></div>
+      </div>
+    </div>
+
+    <!-- owner view shows their properties and workspaces -->
+    <div id="view-owner" style="display:none;">
+      <div class="owner-dash">
+
+        <!-- properties section -->
+        <div class="section-header">
+          <h2>My Properties</h2>
+          <a href="add-property.html" class="btn btn-secondary btn-sm">+ Add Property</a>
+        </div>
+        <div id="message" class="message"></div>
+        <div id="owner-properties"></div>
+
+        <hr style="border-color:var(--border);margin:2rem 0;" />
+
+        <!-- workspaces section -->
+        <div class="section-header">
+          <h2>My Workspaces</h2>
+          <a href="add-workspace.html" class="btn btn-secondary btn-sm">+ Add Workspace</a>
+        </div>
+        <div id="owner-workspaces"></div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- edit property modal -->
+  <div class="modal-overlay" id="modal-edit-property">
+    <div class="modal">
+      <h2>Edit Property</h2>
+      <input type="hidden" id="edit-prop-id" />
+      <div class="form-group">
+        <label>Street Address</label>
+        <input type="text" id="edit-prop-address" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Neighborhood</label>
+          <input type="text" id="edit-prop-neighborhood" />
+        </div>
+        <div class="form-group">
+          <label>Square Feet</label>
+          <input type="number" id="edit-prop-sqft" min="1" />
+        </div>
+      </div>
+      <div class="flex gap-2 flex-wrap mt-1">
+        <div class="checkbox-group">
+          <input type="checkbox" id="edit-prop-parking" />
+          <label for="edit-prop-parking">Parking Garage</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="edit-prop-transit" />
+          <label for="edit-prop-transit">Public Transit</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary"   onclick="saveEditProperty()">Save Changes</button>
+        <button class="btn btn-secondary" onclick="closeModal('modal-edit-property')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit workspace modal -->
+  <div class="modal-overlay" id="modal-edit-workspace">
+    <div class="modal">
+      <h2>Edit Workspace</h2>
+      <input type="hidden" id="edit-ws-id" />
+      <div class="form-group">
+        <label>Type</label>
+        <select id="edit-ws-type">
+          <option value="meeting">Meeting Room</option>
+          <option value="private">Private Office</option>
+          <option value="desk">Open Desk</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Seats</label>
+          <input type="number" id="edit-ws-seats" min="1" />
+        </div>
+        <div class="form-group">
+          <label>Price ($)</label>
+          <input type="number" id="edit-ws-price" min="0" step="0.01" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Lease Term</label>
+          <select id="edit-ws-lease">
+            <option value="day">Per Day</option>
+            <option value="week">Per Week</option>
+            <option value="month">Per Month</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Available From</label>
+          <input type="date" id="edit-ws-date" />
+        </div>
+      </div>
+      <div class="checkbox-group mt-1">
+        <input type="checkbox" id="edit-ws-smoking" />
+        <label for="edit-ws-smoking">Smoking allowed</label>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary"   onclick="saveEditWorkspace()">Save Changes</button>
+        <button class="btn btn-secondary" onclick="closeModal('modal-edit-workspace')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- workspace detail modal for coworkers -->
+  <div class="modal-overlay" id="modal-ws-detail">
+    <div class="modal">
+      <div id="modal-ws-detail-content"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modal-ws-detail')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 WorkSpace</p>
+  </footer>
+  <script src="js/data.js"></script>
+  <script src="js/properties.js"></script>
+</body>
+</html>
